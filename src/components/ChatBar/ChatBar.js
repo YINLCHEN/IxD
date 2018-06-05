@@ -43,7 +43,7 @@ class ChatBar extends Component {
 
         const host = window.location.hostname;
         const port = window.location.port;
-        this.socket = io('http://' + host + ':' + port);
+        this.socket = io('https://' + host + ':' + port);
     }
 
     handleSendClick = (e) => {
