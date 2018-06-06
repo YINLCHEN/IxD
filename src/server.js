@@ -14,9 +14,13 @@ io.on('connection', (socket) => {
     console.log('Hello!');
 
     socket.on('SEND_MESSAGE', function(data){
-        console.log(data);
+        console.log('MESSAGE: ' + data);
         io.emit('RECEIVE_MESSAGE', data);
     })
+
+    socket.on('SEND_ORIENTATION', function(data){
+        io.emit('RECEIVE_ORIENTATION', data);
+    });
 
     socket.on('disconnect', () => {
         console.log('Bye~');
