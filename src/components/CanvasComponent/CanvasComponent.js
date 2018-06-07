@@ -97,8 +97,8 @@ class CanvasComponent extends Component {
                 if((luckyBallX+ballRadius >= x && luckyBallX-ballRadius <= x)&&(luckyBallY+ballRadius >= y && luckyBallY-ballRadius <= y)){
                     drawBall(isEat+=5);
                     ballRadius+=5;
-                    luckyBallX = Math.floor((Math.random() * canvas.width-ballRadius) + ballRadius);
-                    luckyBallY = Math.floor((Math.random() * canvas.height-ballRadius) + ballRadius);
+                    luckyBallX = Math.floor(( Math.random() * (canvas.width-200) ) + 200);
+                    luckyBallY = Math.floor(( Math.random() * (canvas.height-200) ) + 200);
                 }
                 else{
                     drawBall(isEat);
@@ -152,18 +152,18 @@ class CanvasComponent extends Component {
             switch(event.key){
                 case 'ArrowUp':
                     dx = 0;
-                    dy = -1;
+                    dy = -5;
                     break;
                 case 'ArrowDown':
                     dx = 0;
-                    dy = 1;
+                    dy = 5;
                     break;
                 case 'ArrowLeft':
-                    dx = -1;
+                    dx = -5;
                     dy = 0;
                     break;
                 case 'ArrowRight':
-                    dx = 1;
+                    dx = 5;
                     dy = 0;
                     break;
                 default:
@@ -171,7 +171,7 @@ class CanvasComponent extends Component {
             }
         }, true);
 
-        var intervalDrawID =  setInterval(draw, 5);
+        var intervalDrawID =  setInterval(draw, 10);
     }
 
     render(){
