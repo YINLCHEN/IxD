@@ -5,9 +5,28 @@ import io from 'socket.io-client';
 
 const styles = theme => ({
     button: {
-      margin: theme.spacing.unit,
-    }
+        margin: theme.spacing.unit,
+    },
+    Sidebar: {
+        width:'120px',
+        float:'left',
+        height:'280px',
+        textAlign:'center',
+        lineHeight:'280px',
+        fontSize:'15px',
+        fontWeight:'bold'
+    },
 });
+
+const styles1 = {
+    Sidebar: {
+        width:'200px',
+        float:'left',
+        height:'280px',
+        fontSize:'10px',
+        fontWeight:'bold'
+    },
+};
 
 class ChatBoard extends Component {
 
@@ -30,7 +49,7 @@ class ChatBoard extends Component {
 
     render(){
         return (
-            <div>
+            <div style={styles1.Sidebar}>
                 {this.state.messages.map((message,index) => {
                     return (
                         <div key={index}>{message.author}: {message.message}</div>

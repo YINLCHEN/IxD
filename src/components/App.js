@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ChatBar from './ChatBar/ChatBar';
 import ChatBoard from './ChatBoard/ChatBoard';
+import CanvasComponent from './CanvasComponent/CanvasComponent';
 
 import '../css/App.css';
 
@@ -10,6 +11,7 @@ class App extends Component {
             <div>
                 <ChatBar />
                 <ChatBoard />
+                <CanvasComponent />
             </div>
         );
     }
