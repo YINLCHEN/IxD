@@ -50,20 +50,20 @@ class CanvasComponent extends Component {
         const addOrientation = data => {
             if(data.beta < 0 && data.beta >=-180){
                 //console.log('up');
-                dy=-5;
+                dy = -1;
             }
             else if(data.beta >= 0 && data.beta < 180){
                 //console.log('down');
-                dy=5;
+                dy = 1;
             }
 
             if(data.gamma < 0 && data.gamma >= -90){
                 //console.log('left');
-                dx=-5;
+                dx = -1;
             }
             else if(data.gamma >= 0 && data.gamma < 90){
                 //console.log('right');
-                dx=5;
+                dx = 1;
             }
         };
 
@@ -151,33 +151,33 @@ class CanvasComponent extends Component {
         window.addEventListener('keydown', (event) => {
             switch(event.key){
                 case 'ArrowUp':
-                    dx=0;
-                    dy=-10;
+                    dx = 0;
+                    dy = -1;
                     break;
                 case 'ArrowDown':
-                    dx=0;
-                    dy=10;
+                    dx = 0;
+                    dy = 1;
                     break;
                 case 'ArrowLeft':
-                    dx=-10;
-                    dy=0;
+                    dx = -1;
+                    dy = 0;
                     break;
                 case 'ArrowRight':
-                    dx=10;
-                    dy=0;
+                    dx = 1;
+                    dy = 0;
                     break;
                 default:
                 break;
             }
         }, true);
 
-        var intervalDrawID =  setInterval(draw, 30);
+        var intervalDrawID =  setInterval(draw, 5);
     }
 
     render(){
         return (
             <div style={styles.Body}>
-                <canvas ref='canvas' width="1450" height="900">不支援Canvas</canvas>
+                <canvas ref='canvas' width="1400" height="800">不支援Canvas</canvas>
             </div>
         )
     };
