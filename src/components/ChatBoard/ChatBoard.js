@@ -37,7 +37,7 @@ class ChatBoard extends Component {
         };
         var host = window.location.hostname;
         var port = window.location.port;
-        this.socket = io('http://' + host + ':' + port);
+        this.socket = io('https://' + host + ':' + port);
 
         this.socket.on('RECEIVE_MESSAGE', function(messages){
             addMessage(messages);
