@@ -16,4 +16,4 @@ https://yinlchen-ixd.herokuapp.com/
 2. Mobile端開啟 https://yinlchen-ixd.herokuapp.com/
 3. 馬上玩吧！
 
-##目前此遊戲無設計多人模式，僅能單人操作，但可實戰直播！
+## 目前此遊戲無設計多人模式，僅能單人操作，但可實戰直播！
