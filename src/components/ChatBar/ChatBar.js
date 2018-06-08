@@ -13,10 +13,7 @@ import io from 'socket.io-client';
 const SendIcon = (props) => (
     <SvgIcon {...props}>
         {
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                <path d="M0 0h24v24H0z" fill="none"/>
-            </svg>
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
         }
     </SvgIcon>
 );
@@ -46,6 +43,18 @@ class ChatBar extends Component {
         const host = window.location.hostname;
         const port = window.location.port;
         this.socket = io('https://' + host + ':' + port);
+
+        //鍵盤移動事件
+        window.addEventListener('keypress', (event) => {
+            switch(event.key){
+                case 'Enter':
+                    this.handleSendClick()
+                    this.ChatText.value = null
+                    break;
+                default:
+                break;
+            }
+        }, true);
     }
 
     handleSendClick = (e) => {
@@ -77,7 +86,7 @@ class ChatBar extends Component {
                         placeholder="今天想聊什麼呢？"
                         fullWidth
                         margin="normal"
-                        inputRef={el => this.ChatText = el} 
+                        inputRef={el => this.ChatText = el}
                     />
                     <Button variant="contained" color="secondary" onClick={this.handleSendClick}>
                         Send

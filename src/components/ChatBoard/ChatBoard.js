@@ -35,6 +35,7 @@ class ChatBoard extends Component {
         this.state = {
             messages : []
         };
+
         var host = window.location.hostname;
         var port = window.location.port;
         this.socket = io('https://' + host + ':' + port);
@@ -42,6 +43,7 @@ class ChatBoard extends Component {
         this.socket.on('RECEIVE_MESSAGE', function(messages){
             addMessage(messages);
         });
+
         const addMessage = messages => {
             this.setState({messages: [...this.state.messages, messages]});
         };

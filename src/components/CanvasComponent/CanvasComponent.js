@@ -70,8 +70,8 @@ class CanvasComponent extends Component {
         //Canvas繪圖
         var canvas = this.refs.canvas;
         var ctx = this.refs.canvas.getContext("2d");
-        var x = this.refs.canvas.width/2;
-        var y = this.refs.canvas.height/2;
+        var x = this.refs.canvas.width / 2;
+        var y = this.refs.canvas.height / 2;
         var ballRadius = 10;
         var dx = 0;
         var dy = 0;
