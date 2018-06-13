@@ -1,25 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import io from 'socket.io-client';
 
-const styles = theme => ({
-    button: {
-        margin: theme.spacing.unit,
-    },
-    Sidebar: {
-        width:'120px',
-        float:'left',
-        height:'280px',
-        textAlign:'center',
-        lineHeight:'280px',
-        fontSize:'15px',
-        fontWeight:'bold'
-    },
+const host = window.location.hostname;
+const port = window.location.port;
+const socket = io('https://' + host + ':' + port);
+socket.on('connect', function () {
+    socket.emit('join');
 });
 
-const styles1 = {
-    Sidebar: {
+const styles = {
+    Sidebar:{
         width:'200px',
         float:'left',
         height:'280px',
@@ -36,11 +26,7 @@ class ChatBoard extends Component {
             messages : []
         };
 
-        var host = window.location.hostname;
-        var port = window.location.port;
-        this.socket = io('https://' + host + ':' + port);
-
-        this.socket.on('RECEIVE_MESSAGE', function(messages){
+        socket.on('RECEIVE_MESSAGE', function(messages){
             addMessage(messages);
         });
 
@@ -51,7 +37,7 @@ class ChatBoard extends Component {
 
     render(){
         return (
-            <div style={styles1.Sidebar}>
+            <div style={styles.Sidebar}>
                 {this.state.messages.map((message,index) => {
                     return (
                         <div key={index}>{message.author}: {message.message}</div>
@@ -62,8 +48,4 @@ class ChatBoard extends Component {
     };
 }
 
-ChatBoard.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(ChatBoard);
+export default ChatBoard;

@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
 
+const host = window.location.hostname;
+const port = window.location.port;
+const socket = io('https://' + host + ':' + port);
+socket.on('connect', function () {
+    socket.emit('join');
+});
+
 const styles = {
     Body:{
         fontSize:'15px',
@@ -20,9 +27,6 @@ class CanvasComponent extends Component {
             beta:0,
             gamma:0
         };
-        const host = window.location.hostname;
-        const port = window.location.port;
-        this.socket = io('https://' + host + ':' + port);
     }
 
     componentDidMount(){
@@ -36,14 +40,14 @@ class CanvasComponent extends Component {
             beta  = event.beta;
             gamma = event.gamma;
 
-            this.socket.emit('SEND_ORIENTATION', {
+            socket.emit('SEND_ORIENTATION', {
                 alpha: Math.round(alpha),
                 beta:  Math.round(beta),
                 gamma: Math.round(gamma)
             });
         }, false);
 
-        this.socket.on('RECEIVE_ORIENTATION', function(data){
+        socket.on('RECEIVE_ORIENTATION', function(data){
             addOrientation(data);
         });
 
@@ -125,7 +129,7 @@ class CanvasComponent extends Component {
                 msg = data-10 + '分, 啊不就好棒棒？！';
             }
 
-            this.socket.emit('SEND_MESSAGE', {
+            socket.emit('SEND_MESSAGE', {
                 author: '分數',
                 message: msg
             });
