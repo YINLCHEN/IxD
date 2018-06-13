@@ -5,9 +5,6 @@ var io = require('socket.io')(http);
 
 app.use(express.static('build'));
 
-app.get('/', function (req, res) {
-});
-
 io.on('connection', (socket) => {
     console.log('Connection Success!');
 

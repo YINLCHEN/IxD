@@ -11,7 +11,7 @@ import '../css/App.css';
 const location = window.location.toString();
 const host = window.location.hostname;
 const port = window.location.port;
-const socket = io('https://' + host + ':' + port);
+const socket = io.connect('https://' + host + ':' + port);
 
 socket.on('connect', function () {
     socket.emit('join');
