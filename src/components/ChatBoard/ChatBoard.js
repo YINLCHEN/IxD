@@ -4,9 +4,6 @@ import io from 'socket.io-client';
 const host = window.location.hostname;
 const port = window.location.port;
 const socket = io.connect('https://' + host + ':' + port);
-socket.on('connect', function () {
-    socket.emit('join');
-});
 
 const styles = {
     Sidebar:{
