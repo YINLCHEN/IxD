@@ -7,7 +7,7 @@ var io = require('socket.io')(http);
 app.use(express.static('build'));
 
 var RoomList = {};
-var curRoomName = '';
+var curRoomName = 0;
 io.on('connection', (socket) => {
 
     socket.on('SEND_ROOMLIST', function(data){
@@ -22,17 +22,16 @@ io.on('connection', (socket) => {
 
     socket.on('SEND_JOINROOM', function(data){
         curRoomName = data.RoomID;
+        socket.join(curRoomName);
         io.emit('RECEIVE_CURROOMNAME', curRoomName);
     })
 
     socket.on('SEND_MESSAGE', function(data){
-        socket.join(curRoomName);
-        io.to(curRoomName).emit('RECEIVE_MESSAGE', data);
+        socket.broadcast.to(curRoomName).emit('RECEIVE_MESSAGE', data);
     })
 
     socket.on('SEND_ORIENTATION', function(data){
-        socket.join(curRoomName);
-        io.to(curRoomName).emit('RECEIVE_ORIENTATION', data);
+        socket.broadcast.to(curRoomName).emit('RECEIVE_ORIENTATION', data);
     });
 
     socket.on('disconnect', () => {
