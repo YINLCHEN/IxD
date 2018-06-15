@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 const host = window.location.hostname;
 const port = window.location.port;
-const socket = io.connect('https://' + host + ':' + port);
+var socket = io.connect('https://' + host + ':' + port);
 
 const styles = {
     Sidebar:{

@@ -4,6 +4,7 @@ import ChatBar from './ChatBar/ChatBar';
 import ChatBoard from './ChatBoard/ChatBoard';
 import CanvasComponent from './CanvasComponent/CanvasComponent';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import io from 'socket.io-client';
 
 import '../css/App.css';
@@ -11,7 +12,7 @@ import '../css/App.css';
 const RoomID = new Date().getTime();
 const host = window.location.hostname;
 const port = window.location.port;
-const socket = io.connect('https://' + host + ':' + port);
+var socket = io.connect('https://' + host + ':' + port);
 
 //判斷手機端
 var sUserAgent = navigator.userAgent.toLowerCase();
@@ -29,7 +30,6 @@ class App extends Component {
         super(props);
         this.state = {
             RoomList:[],
-            RoomID: 0, 
             pageStatus:1
         };
 
@@ -50,21 +50,28 @@ class App extends Component {
 
         const showCurRoom = data => {
             console.log('showCurRoom: ' + data)
+            this.setState({
+                pageStatus:3
+            });
         };
     }
 
     handlePlayClick = (e) => {
-        socket.emit('SEND_ROOMLIST', {
-            RoomID: RoomID
+        //新增玩家
+        console.log(this.NicknameText.value)
+        console.log(RoomID.toString())
+        console.log(isMobile)
+
+        socket.emit('SEND_ADDUSER', {
+            UserName: this.NicknameText.value,
+            RoomID: RoomID.toString(),
+            isMobile: isMobile,
         });
     }
 
     handleJoinRoomClick = (e) => {
         socket.emit('SEND_JOINROOM', {
             RoomID: e.currentTarget.value
-        });
-        this.setState({
-            pageStatus:3
         });
     }
 
@@ -77,11 +84,18 @@ class App extends Component {
         );
 
         var renderIndexHtml = null;
-        console.log(this.state.pageStatus)
         switch(this.state.pageStatus){
             case 1:
                 renderIndexHtml = 
                     <div className = 'qrcode-container'>
+                        <TextField
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="輸入名字"
+                            margin="normal"
+                            inputRef={el => this.NicknameText = el}
+                        />
                         <Button color="secondary" onClick={this.handlePlayClick}>
                         Play!
                         </Button>
@@ -103,6 +117,7 @@ class App extends Component {
                         <CanvasComponent />
                     </div>
                 break;
+            default:
         }
 
         return (
