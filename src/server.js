@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
                 RoomList[data.RoomID]++;
             }
         }
-        
+        console.log(data)
         io.emit('RECEIVE_ROOMLIST', RoomList);
     })
 
