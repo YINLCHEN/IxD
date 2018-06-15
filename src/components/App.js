@@ -30,7 +30,8 @@ class App extends Component {
         super(props);
         this.state = {
             RoomList:[],
-            pageStatus:1
+            pageStatus:1,
+            UserName: ''
         };
 
         socket.on('RECEIVE_ROOMLIST', function(data){
@@ -66,6 +67,10 @@ class App extends Component {
             UserName: this.NicknameText.value,
             RoomID: RoomID.toString(),
             isMobile: isMobile,
+        });
+
+        this.setState({
+            UserName:this.NicknameText.value
         });
     }
 
@@ -112,7 +117,7 @@ class App extends Component {
             case 3:
                 renderIndexHtml = 
                     <div>
-                        <ChatBar />
+                        <ChatBar NickName={this.state.UserName} />
                         <ChatBoard />
                         <CanvasComponent />
                     </div>

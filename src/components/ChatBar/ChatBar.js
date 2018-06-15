@@ -38,6 +38,10 @@ class ChatBar extends Component {
         }, true);
     }
 
+    componentDidMount(){
+        this.NicknameText.value = this.props.NickName
+    }
+
     handleSendClick = (e) => {
         socket.emit('SEND_MESSAGE', {
             author: this.NicknameText.value,
